@@ -1,0 +1,110 @@
+CREATE DATABASE TAXI;
+USE TAXI;
+
+CREATE TABLE DRIVER_DETAILS (
+   driver_id int PRIMARY KEY,
+   driver_name varchar(255),
+   driver_lname varchar(255),
+driver_phone int
+);
+Insert into driver_details( driver_id,driver_name,driver_lname,driver_phone) values(
+(1,'jivi','kutty',7975392223),
+(2,'kivi','smith',7975392234),
+(3,'livi','jobs',9875392223),
+(4,'ram','jose',9875232223),
+(5,'sham','ros',7675392223));
+
+CREATE TABLE TAXI_DETAILS(
+taxi_id int,
+taxi_type varchar(255),
+reg_no varchar(255),
+driver_id int,
+usr_id int,
+FOREIGN KEY(driver_id) REFERENCES DRIVER_DETAILS(driver_id),
+FOREIGN KEY(usr_id) REFERENCES USER_DETAIL(usr_id)
+);
+Insert into taxi_details (taxi_id,taxi_type,reg_no,driver_id,usr_id) values(
+(101,'premium delux','KA011234',2,3),
+(102,'XL','KA023454',1,2),
+(103,'delux','KA021234',3,5),
+(104,'go sedan','KA011233',1,4),
+(101,'premium delux','KA011234',5,6),
+(104,'go sedan','KA011233',2,7),
+(102,'XL','KA023454',2,8)
+);
+
+
+CREATE TABLE BILLING_DETAIL (
+   bill_no int PRIMARY KEY,
+   Bill_date date,
+   total_amt int,
+   discount int,
+   usr_id int,
+   FOREIGN KEY(usr_id) REFERENCES USER_DETAIL(usr_id)
+);
+
+Insert into billing_detail(bill_no,bill_date,total_amt,discount,usr_id) values (
+(2022101,2022-10-09,203,32,1),
+(2022101,2022-10-18,130,23,3),
+(2022101,2022-07-10,193,5,5),
+(2022101,2022-10-15,560,34,2),
+(2022101,2022-08-09,90,22,4),
+(2022101,2022-10-17,150,9,7),
+(2022101,2022-10-09,293,28,6),
+(2022101,2022-10-09,200,33,8)
+);
+
+
+CREATE TABLE USER_DETAIL (
+   usr_id int PRIMARY KEY,
+   u_fname varchar(255),
+   u_lname varchar(255),
+   u_phone int
+);
+
+Insert into user_detail( usr_id,u_fname,u_lname,u_phone) values(
+(1,'aksh','kutty',7975391223),
+(2,'kevin','smith',7975311234),
+(3,'harry','potter',9874592223),
+(4,'ron','weasley',9872232223),
+(5,'fred','george',7675344223),
+(6,'hermione','granger',7675344223),
+(7,'arthur','weasley',7675344223),
+(8,'deeps','geroge',7675344223));
+
+CREATE TABLE ALTERNATE_CONTACT_PERSON_DETAILS (
+   u_fname varchar(255),
+   u_lname varchar(255),
+   u_phone int,
+   usr_id int,
+   FOREIGN KEY(usr_id) REFERENCES USER_DETAIL(usr_id)
+);
+
+Insert into ALTERNATE_CONTACT_PERSON_DETAILS( u_fname,u_lname,u_phone,usr_id) values(
+(1,'jivi','kutty',7975392223),
+(2,'kivi','smith',7975392234),
+(3,'livi','jobs',9875392223),
+(4,'ram','jose',9875232223),
+(5,'sham','ros',7675392223));
+
+CREATE TABLE TRIP_DETAIL(
+trip_id int PRIMARY KEY,
+fare int,
+trip_date date,
+start_time datetime,
+end_time datetime,
+usr_id int,
+FOREIGN KEY(usr_id) REFERENCES USER_DETAIL(usr_id)
+);
+
+-- user and their alternate contacts who travelled on a particular date
+
+
+
+
+
+
+
+
+
+
